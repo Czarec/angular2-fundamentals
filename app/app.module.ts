@@ -9,6 +9,7 @@ import {
     EventDetailsComponent,
     CreateEventComponent,
     CreateSessionComponent,
+    SessionListComponent,
     EventService,
     EventRouteActivator,
     EventsListResolverService
@@ -37,6 +38,7 @@ import { appRoutes } from './routes';
         EventDetailsComponent,
         CreateEventComponent,
         CreateSessionComponent,
+        SessionListComponent,
         Error404Component
     ],
     providers: [
