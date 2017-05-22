@@ -50,6 +50,7 @@ module.exports = function(config) {
       // (these paths need to be rewritten, see proxies section)
       { pattern: appBase + '**/*.html', included: false, watched: true },
       { pattern: appBase + '**/*.css', included: false, watched: true },
+      { pattern: appBase + '**/*.scss', included: false, watched: true },
 
       // Paths for debugging with source maps in dev tools
       { pattern: appSrcBase + '**/*.ts', included: false, watched: false },
