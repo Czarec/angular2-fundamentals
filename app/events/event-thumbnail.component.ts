@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'event-thumbnail',
@@ -6,9 +6,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: [ 'app/events/event-thumbnail.component.scss' ]
 })
 export class EventThumbnailComponent {
-    @Input() event: any;
+    @Input() public event: any;
 
-    getStartTimeClass() : any {
+    public getStartTimeClass(): any {
         const earlyStart = this.event && this.event.time === '8:00 am';
         return {
             green: earlyStart,

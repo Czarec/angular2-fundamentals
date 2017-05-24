@@ -1,19 +1,19 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { SessionListComponent } from './session-list.component';
-import { UpvoteComponent } from './upvote.component';
-import { DurationPipe } from '../shared/duration.pipe';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { CollapsibleWellComponent } from '../../common/collapsible-well.component';
 import { AuthService } from '../../user/auth.service';
-import { VoterService } from './voter.service';
+import { DurationPipe } from '../shared/duration.pipe';
 import { ISession } from '../shared/session.model';
-import { By } from '@angular/platform-browser';
+import { SessionListComponent } from './session-list.component';
+import { UpvoteComponent } from './upvote.component';
+import { VoterService } from './voter.service';
 
 describe('SessionListComponent', () => {
-    let fixture: ComponentFixture<SessionListComponent>,
-       component: SessionListComponent,
-       element: HTMLElement,
-       debugEl: DebugElement;
+    let fixture: ComponentFixture<SessionListComponent>;
+    let component: SessionListComponent;
+    let element: HTMLElement;
+    let debugEl: DebugElement;
 
     beforeEach(async(() => {
         let mockAuthService = {
@@ -71,9 +71,9 @@ describe('SessionListComponent', () => {
 
 });
 
-function createSampleSession(id: number) : ISession {
+function createSampleSession(id: number): ISession {
     return {
-        id: id,
+        id,
         name: 'Session ' + id,
         presenter: 'Joe',
         duration: 1,

@@ -1,43 +1,39 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import {
-    EventsListComponent,
-    EventThumbnailComponent,
-    EventDetailsComponent,
+    CollapsibleWellComponent,
+    IToastr,
+    JQ_TOKEN,
+    ModalTriggerDirective,
+    SimpleModalComponent,        
+    TOASTR_TOKEN
+} from './common/index';
+import { Error404Component } from './errors/404.component';
+import { EventsAppComponent } from './events-app.component';
+import {
     CreateEventComponent,
     CreateSessionComponent,
-    SessionListComponent,
-    UpvoteComponent,
-    EventService,
-    EventsListResolverService,
+    DurationPipe,
+    EventDetailsComponent,
     EventResolverService,
+    EventService,
+    EventsListComponent,
+    EventsListResolverService,
+    EventThumbnailComponent,
+    LocationValidator,
+    SessionListComponent,         
+    UpvoteComponent,
     VoterService,
-    LocationValidator, 
-    DurationPipe
 } from './events/index';
-
-import {
-    TOASTR_TOKEN,
-    Toastr,
-    JQ_TOKEN,
-    CollapsibleWellComponent,
-    SimpleModalComponent,
-    ModalTriggerDirective
-} from './common/index';
-
-import { EventsAppComponent } from './events-app.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { Error404Component } from './errors/404.component';
+import { appRoutes } from './routes';
 import { AuthService} from './user/auth.service';
 
-import { appRoutes } from './routes';
-
-declare let toastr : Toastr;
-declare let jQuery : Object;
+declare let toastr: IToastr;
+declare let jQuery: Object;
 
 @NgModule({
     imports: [

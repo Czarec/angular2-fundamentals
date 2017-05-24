@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ISession } from '../shared/index';
 import { AuthService } from '../../user/auth.service';
+import { ISession } from '../shared/index';
 import { VoterService } from './voter.service';
 
 @Component({
@@ -9,17 +9,18 @@ import { VoterService } from './voter.service';
     styleUrls: ['app/events/event-details/session-list.component.scss']
 })
 export class SessionListComponent implements OnChanges {
-    @Input() sessions: ISession[];
-    @Input() filterBy: string;
-    @Input() sortBy: string;
-    @Input() eventId: number;
-    visibleSessions: ISession[] = [];
+    
+    @Input() public sessions: ISession[];
+    @Input() public filterBy: string;
+    @Input() public sortBy: string;
+    @Input() public eventId: number;
+    public visibleSessions: ISession[] = [];
 
     constructor(private auth: AuthService, private voterService: VoterService) {
 
     }
 
-    ngOnChanges() {
+    public ngOnChanges() {
         if (this.sessions) {
             this.filterSessions(this.filterBy);
             this.sortBy === 'name'
@@ -28,7 +29,7 @@ export class SessionListComponent implements OnChanges {
         }
     }
 
-    filterSessions(filter) {
+    public filterSessions(filter) {
         if (filter === 'all') {
             this.visibleSessions = this.sessions.slice(0);
         } else {
@@ -38,17 +39,21 @@ export class SessionListComponent implements OnChanges {
         }
     }
 
-    sortByNameAsc(x: ISession, y: ISession) {
-        if (x.name > y.name) return 1;
-        else if (x.name === y.name) return 0;
-        else return -1;
+    public sortByNameAsc(x: ISession, y: ISession) {
+        if (x.name > y.name) {
+            return 1;
+        } else if (x.name === y.name) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 
-    sortByVotesDesc(x: ISession, y: ISession) {
+    public sortByVotesDesc(x: ISession, y: ISession) {
         return y.voters.length - x.voters.length;
     }
 
-    toggleVote(session: ISession) {
+    public toggleVote(session: ISession) {
         if (this.userHasVoted(session)) {
             this.voterService.deleteVoter(this.eventId, session, this.auth.currentUser.userName);
         } else {
@@ -59,7 +64,7 @@ export class SessionListComponent implements OnChanges {
         }
     }
 
-    userHasVoted(session: ISession) {
+    public userHasVoted(session: ISession) {
         return this.voterService.userHasVoted(session, this.auth.currentUser.userName);
     }
 }

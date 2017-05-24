@@ -1,28 +1,28 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IToastr, TOASTR_TOKEN } from '../common/toastr.service';
 import { AuthService } from './auth.service';
-import { TOASTR_TOKEN, Toastr } from '../common/toastr.service';
 
 @Component({
     templateUrl: 'app/user/profile.component.html',
     styleUrls: ['app/user/profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-    
+
+    public profileForm: FormGroup;
+    public firstName: FormControl;
+    public lastName: FormControl;
+
     constructor(
         private auth: AuthService,
         private router: Router,
-        @Inject(TOASTR_TOKEN) private toastr: Toastr) {
+        @Inject(TOASTR_TOKEN) private toastr: IToastr) {
 
     }
 
-    profileForm: FormGroup;
-    firstName: FormControl;
-    lastName: FormControl;
-
-    ngOnInit() {
-        this.firstName = new FormControl(this.auth.currentUser.firstName, [ Validators.required, Validators.pattern('[a-zA-Z].*') ]);
+    public ngOnInit() {
+        this.firstName = new FormControl(this.auth.currentUser.firstName,[ Validators.required, Validators.pattern('[a-zA-Z].*') ]);
         this.lastName = new FormControl(this.auth.currentUser.lastName, Validators.required);
         this.profileForm = new FormGroup({
             firstName: this.firstName,
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    saveProfile(formValues) {
+    public saveProfile(formValues) {
         if (this.profileForm.valid) {
             this.auth.updateCurrentUser(formValues.firstName, formValues.lastName).subscribe(() => {
                 this.toastr.success('Profile Saved');
@@ -38,21 +38,21 @@ export class ProfileComponent implements OnInit {
         }
     }
 
-    validateLastName() {
+    public validateLastName() {
         return this.lastName.valid || this.lastName.untouched;
     }
 
-    validateFirstName() {
+    public validateFirstName() {
         return this.firstName.valid || this.firstName.untouched;
     }
 
-    cancel() {
+    public cancel() {
         this.router.navigate(['events']);
     }
 
-    logout() {
+    public logout() {
         this.auth.logout().subscribe(() => {
-            this.router.navigate(['/user/login'])
+            this.router.navigate(['/user/login']);
         });
     }
 }

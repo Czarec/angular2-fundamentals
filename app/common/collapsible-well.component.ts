@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['app/common/collapsible-well.component.scss']
 })
 export class CollapsibleWellComponent {
-    visible: boolean = true;
+    public visible: boolean = true;
 
-    toggleContent() {
+    public toggleContent() {
         this.visible = !this.visible;
     }
 }
